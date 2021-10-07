@@ -112,13 +112,48 @@ const printCells = (state) => {
   return cellRep;
 };
 
-const getNeighborsOf = ([x, y]) => {};
+const getNeighborsOf = ([x, y]) => [[x-1, y-1], [x, y-1], [x+1, y-1], [x-1,y], [x+1, y], [x-1, y+1], [x, y+1], [x+1, y+1]];
 
-const getLivingNeighbors = (cell, state) => {};
+const getLivingNeighbors = (cell, state) => {
+  let livingNeighbours = [];
+  let neighbours = getNeighborsOf(cell);
+  let contain = contains.bind(state);
+  for (let i = 0; i < neighbours.length; i++) {
+    let livingNeighbour = contain(neighbours[i]);
+    if (livingNeighbour) {
+      livingNeighbours.push(neighbours[i]);
+    } 
+    }
+    return livingNeighbours;
+  };
 
-const willBeAlive = (cell, state) => {};
 
-const calculateNext = (state) => {};
+const willBeAlive = (cell, state) => {
+  if ((getLivingNeighbors(cell, state).length === 3) || (contains.call(state, cell) && (getLivingNeighbors(cell, state).length === 2))){
+    return true;
+  }
+  return false;
+};
+
+const calculateNext = (state) => {
+  let nextState = [];
+  for (let i = 0; i < state.length; i++) {
+    if(willBeAlive(state[i], state)){
+      nextState.push(state[i]);
+    }
+  }
+  let topRight = [(corners(state).topRight[0] + 1), (corners(state).topRight[1] + 1)];
+  let bottomLeft = [(corners(state).bottomLeft[0] - 1), (corners(state).bottomLeft[1] - 1)];
+
+  for (let i = topRight[1]; i >= bottomLeft[1]; i--) {
+    for (let j = 0; j <= topRight[0]; j++) {
+      if (willBeAlive([i, j], state)){
+        nextState.push([i, j]);
+      }
+    }
+  }
+  return nextState;
+};
 
 const iterate = (state, iterations) => {};
 
