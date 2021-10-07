@@ -63,18 +63,19 @@ const corners = (state = []) => {
 
   var newMinYCoord = minYCoord
 
-  if (minYCoord === maxYCoord) {
-    minYCoord = minYCoord;
-  } else{
+  if (maxYCoord === minYCoord) {
+    maxYCoord=maxYCoord;
+  }else{
+    
     do {
       minYCoord++;
     } while (minYCoord < maxYCoord);
-  }
-  
 
-  do {
-    maxYCoord--;
-  } while (maxYCoord > newMinYCoord);
+    do {
+      maxYCoord--;
+    } while (maxYCoord > newMinYCoord);  
+  }
+
   
   let topRight = [state[maxCellIdx][0], minYCoord];
   let bottomLeft = [state[minCellIdx][0], maxYCoord];
@@ -96,25 +97,16 @@ const printCells = (state) => {
   }
   while (!(same([cellXCoord, cellYCoord], [a,b]))) {
     cellXCoord = corners1.bottomLeft[0];
-    // console.log("in first while loop")
   while (cellXCoord < (a+1)) {
-      // console.log('in second while loop')
     cellRep = cellRep.concat(printCell([cellXCoord, cellYCoord], state) + " ");
-    // console.log('after printing cell' + cellRep);
     cellXCoord++;
-    // console.log(cellYCoord);
   }
   cellYCoord--;
-  // console.log('ycoord after decreament ' + cellYCoord);
   if (cellYCoord < corners1.bottomLeft[1]){
-    // console.log('In if loop');
      cellXCoord--;
      cellYCoord++;
-    // console.log(cellXCoord);
   }
-  // console.log(cellYCoord);
   cellRep = cellRep.concat("\n");
-  // console.log(cellRep);
   continue;
 }
   return cellRep;
