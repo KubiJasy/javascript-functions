@@ -167,10 +167,10 @@ const iterate = (state, iterations) => {
 };
 
 const main = (pattern, iterations) => {
-  // let gameStates = iterate(pattern, iterations);
-  // for (let i = 0; i < gameStates.length; i++) {
-  //   let intermediary = printCells(gameStates[i]);
-  //   console.log(intermediary + "\n");
+  let gameStates = iterate(startPatterns[pattern], iterations);
+  for (let i = 0; i < gameStates.length; i++) {
+    let intermediary = printCells(gameStates[i]);
+    console.log(intermediary + "\n");}
 };
 
 const startPatterns = {
