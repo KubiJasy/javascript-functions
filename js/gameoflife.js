@@ -166,12 +166,12 @@ const iterate = (state, iterations) => {
   return gameStates;
 };
 
-const main = (pattern, iterations) => {};
-//   let gameStates = iterate(startPatterns[pattern], iterations);
-//   for (let i = 0; i < gameStates.length; i++) {
-//     let intermediary = printCells(gameStates[i]);
-//     console.log(intermediary + "\n");}
-// };
+const main = (pattern, iterations) => {
+  let gameStates = iterate(startPatterns[pattern], iterations);
+  for (let i = 0; i < gameStates.length; i++) {
+    let intermediary = printCells(gameStates[i]);
+    console.log(intermediary + "\n");}
+};
 
 const startPatterns = {
     rpentomino: [
